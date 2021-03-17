@@ -22,8 +22,8 @@ Get url params as an unique object
 
 ```js
 const SEARCH = location.search.substring(1);
-const PARAMS = decodeURI(search).replace(/"/g, '\\"').replace(/&/g, '","').replace(/=/g, '":"');
-const PARSED_OBJECT = JSON.parse(`{"${params}"}`);
+const PARAMS = decodeURI(SEARCH).replace(/"/g, '\\"').replace(/&/g, '","').replace(/=/g, '":"');
+const PARSED_OBJECT = JSON.parse(`{"${PARAMS}"}`);
 
 // url: ?license=myLicense&id=2
 console.log(PARSED_OBJECT) // { license: "myLicense", id: "2" }
