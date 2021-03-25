@@ -32,7 +32,16 @@ console.log(PARSED_OBJECT) // { license: "myLicense", id: "2" }
 
 # Check wether user is logged in or not
 
+We can check this using the `$.ajax` function or even the global `vtexjs` variable. <br />
+You can use `$.ajax` if you can't wait for the `vtexjs` variable to load.
+
 ```js
+// first one
+const isLoggedIn = vtexjs.checkout.orderForm.loggedIn;
+```
+
+```js
+// second one
 $.ajax({
   url: '/no-cache/profileSystem/getProfile',
   success: ({ IsUserDefined }) => {
