@@ -3,6 +3,7 @@
 ## Content
   - [**VTEX** | Data Entities API](#data-entities-api)
   - [Get URL params as object](#get-url-params-as-object)
+  - [Check wether user is logged in or not](#check-wether-user-is-logged-in-or-not)
 
 # Data Entities API
 Get entities based on created **acronym**
@@ -27,4 +28,20 @@ const PARSED_OBJECT = JSON.parse(`{"${PARAMS}"}`);
 
 // url: ?license=myLicense&id=2
 console.log(PARSED_OBJECT) // { license: "myLicense", id: "2" }
+```
+
+# Check wether user is logged in or not
+
+```js
+$.ajax({
+  url: '/no-cache/profileSystem/getProfile',
+  success: ({ IsUserDefined }) => {
+    if (IsUserDefined) {
+      // user is defined
+      return;
+    }
+    
+    // user is not defined
+  }
+});
 ```
