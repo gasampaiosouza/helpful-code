@@ -4,6 +4,7 @@
   - [**VTEX** | Data Entities API](#data-entities-api)
   - [Get URL params as object](#get-url-params-as-object)
   - [Check wether user is logged in or not](#check-wether-user-is-logged-in-or-not)
+  - [Convert date to ages](#convert-date-to-ages)
 
 # Data Entities API
 Get entities based on created **acronym**
@@ -53,4 +54,24 @@ $.ajax({
     // user is not defined
   }
 });
+```
+
+# Convert date to ages
+
+You can use this if you're receiving some date coming from the `date html input` and want it to be calculated in ages.
+
+```js
+const getAge = (birth) => {
+  let today = new Date();
+  ageMS = Date.parse(Date()) - Date.parse(birth);
+  today.setTime(ageMS);
+  age = today.getFullYear() - 1970;
+
+  return age || 0;
+}
+
+// use cases - 30/03/2021
+getAge('2004-01-05') // 17
+getAge('2003-03-30') // if i'm turning 18 today - 18
+getAge('') // 0
 ```
