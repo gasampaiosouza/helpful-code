@@ -61,7 +61,8 @@ $.ajax({
 You can use this if you're receiving some date coming from the `date html input` and want it to be calculated in ages.
 
 ```js
-const getAge = (birth) => {
+// param type: YYYY-MM-DD
+const getAge = birth => {
   let today = new Date();
   ageMS = Date.parse(Date()) - Date.parse(birth);
   today.setTime(ageMS);
