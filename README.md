@@ -20,18 +20,18 @@ $.ajax({
 ```
 
 # Get URL params as object
-Get url params as an unique object
+Get url params as an unique object.
 
 ```js
-const SEARCH = location.search.substring(1);
-const PARAMS = decodeURI(SEARCH).replace(/"/g, '\\"').replace(/&/g, '","').replace(/=/g, '":"');
-const PARSED_OBJECT = JSON.parse(`{"${PARAMS}"}`);
+// let's say that url params are = '?abc=123&myParam=8'
 
-// url: ?license=myLicense&id=2
-console.log(PARSED_OBJECT) // { license: "myLicense", id: "2" }
+const PARAMS = new URLSearchParams(location.search);
+
+PARAMS.get("abc"); // 123
+PARAMS.get("myParam"); // 8
 ```
 
-# Check wether user is logged in or not
+# Check whether user is logged in or not
 
 We can check this using the `$.ajax` function or even the global `vtexjs` variable. <br />
 You can use `$.ajax` if you can't wait for the `vtexjs` variable to load.
@@ -58,10 +58,10 @@ $.ajax({
 
 # Convert date to ages
 
-You can use this if you're receiving some date coming from the `date html input` and want it to be calculated in ages.
+You can use this if you're receiving a _date_ value and wanna parse it to ages.
 
 ```js
-// param type: YYYY-MM-DD
+// param type: YYYY-MM-DD -> American age
 const getAge = birth => {
   let today = new Date();
   ageMS = Date.parse(Date()) - Date.parse(birth);
@@ -74,5 +74,26 @@ const getAge = birth => {
 // use cases - 30/03/2021
 getAge('2004-01-05') // 17
 getAge('2003-03-30') // if i'm turning 18 today - 18
+getAge('') // 0
+```
+
+```js
+// param type: DD/MM/AAA -> Brazilian age
+function getAge(birth) {
+    const [day, month, year] = birth.split("/");
+    const birthday = new Date(parseInt(year, 10),
+    parseInt(month, 10) - 1,
+    parseInt(day, 10));
+
+    const diff = Date.now() - birthday.getTime();
+    const age = new Date(diff);
+
+    return Math.abs(age.getUTCFullYear() - 1970) || 0;
+}
+
+// use cases - 31/03/2021
+getAge('16/09/1986') // 34
+getAge('05/01/2004') // 17
+getAge('31/03/2003') // 18
 getAge('') // 0
 ```
