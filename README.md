@@ -3,7 +3,7 @@
 ## Content
   - [**VTEX** | Data Entities API](#data-entities-api)
   - [Get URL params as object](#get-url-params-as-object)
-  - [Check wether user is logged in or not](#check-wether-user-is-logged-in-or-not)
+  - [Check whether user is logged in or not](#check-wether-user-is-logged-in-or-not)
   - [Convert date to ages](#convert-date-to-ages)
 
 # Data Entities API
