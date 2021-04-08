@@ -1,0 +1,81 @@
+<section class="countdown" id="countdown">
+  <!-- if you want to add a title -->
+  <!-- <h1 class="countdown-title"></h1> -->
+
+  <div class="countdown-timer">
+    <span class="countdown-timer__days time">00</span>
+    <span class="countdown-timer__colon">:</span>
+    <span class="countdown-timer__hours time">00</span>
+    <span class="countdown-timer__colon">:</span>
+    <span class="countdown-timer__minutes time">00</span>
+    <span class="countdown-timer__colon">:</span>
+    <span class="countdown-timer__seconds time">00</span>
+  </div>
+</section>
+
+<!-- JS -->
+<script>
+  const END_DATE = '11/04/2021';
+  const END_HOURS = '00:00:00';
+  const ELEMENTS = {
+    Days: $('.countdown-timer__days'),
+    Hours: $('.countdown-timer__hours'),
+    Minutes: $('.countdown-timer__minutes'),
+    Seconds: $('.countdown-timer__seconds'),
+  };
+
+  // receives a brazilian date format
+  function ParseCountdownDate(date, time) {
+    // 00:00:00
+    const TIME_REGEX = /(\d{2}:?){3}/;
+    const AMERICAN_DATE = date.split('/').reverse().join('-');
+
+    if (!TIME_REGEX.test(time)) {
+      throw new Error('ParseCountdownDate: Invalid { time } parameter');
+    }
+
+    return `${AMERICAN_DATE} ${time}`;
+  }
+
+  function GetTimeRemaining(endDate) {
+    const AddZeros = (label) => String(label).padStart(2, '0');
+
+    const TOTAL = Date.parse(endDate) - Date.parse(new Date());
+    const SECONDS = Math.floor((TOTAL / 1000) % 60);
+    const MINUTES = Math.floor((TOTAL / 1000 / 60) % 60);
+    const HOURS = Math.floor((TOTAL / (1000 * 3600)) % 24);
+    const DAYS = Math.floor(TOTAL / (1000 * 86400));
+
+    return {
+      TOTAL,
+      DAYS: AddZeros(DAYS),
+      HOURS: AddZeros(HOURS),
+      MINUTES: AddZeros(MINUTES),
+      SECONDS: AddZeros(SECONDS),
+    };
+  }
+
+  function InitializeCountdown() {
+    const END_TIME = ParseCountdownDate(END_DATE, END_HOURS);
+
+    const INTERVAL = setInterval(() => {
+      const { TOTAL, DAYS, HOURS, MINUTES, SECONDS } = GetTimeRemaining(
+        END_TIME
+      );
+
+      ELEMENTS.Days.html(DAYS);
+      ELEMENTS.Hours.html(HOURS);
+      ELEMENTS.Minutes.html(MINUTES);
+      ELEMENTS.Seconds.html(SECONDS);
+
+      // end cycle
+      if (TOTAL <= 0) {
+         //...
+        
+        clearInterval(INTERVAL);
+      }
+    }, 1000);
+  }
+
+  $(InitializeCountdown);
+</script>
