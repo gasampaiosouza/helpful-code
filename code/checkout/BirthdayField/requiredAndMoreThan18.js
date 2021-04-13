@@ -15,24 +15,24 @@ const _headers = {
 const funcsBirthDate = {
   init: () => {
       const userData = vtexjs.checkout.orderForm.clientProfileData;
-      //EXISTE DUAS POSSIBILIDADES DE USUÃRIOS LOGADOS
-      //1Â° TEM DADOS SALVOS MAS NÃƒO ESTÃ CONECTADO
-      //2Â° TEM DADOS SALVOS E ESTÃ CONECTADO
-      //3Â° NÃƒO TEM DADOS SALVOS
+      // EXISTE DUAS POSSIBILIDADES DE USUÃRIOS LOGADOS
+      // 1Â° TEM DADOS SALVOS MAS NÃƒO ESTÃ CONECTADO
+      // 2Â° TEM DADOS SALVOS E ESTÃ CONECTADO
+      // 3Â° NÃƒO TEM DADOS SALVOS
 
-      //VERIFICAÃ‡ÃƒO SE EXISTE DADOS DO USUÃRIO
+      // VERIFICAÃ‡ÃƒO SE EXISTE DADOS DO USUÃRIO
       if (userData !== null) {
           if (userData.document !== null && userData.document.split('*').length > 1 ||
               userData.firstName !== null && userData.firstName.split('*').length > 1 ||
               userData.phone !== null && userData.phone.split('*').length > 1) {
-              //1Â°
+              // 1Â°
               funcsBirthDate.checKIfHaveBirthDate(1);
           } else {
-              //2Â°
+              // 2Â°
               funcsBirthDate.checKIfHaveBirthDate(2);
           }
       } else {
-          //3Â°
+          // 3Â°
           funcsBirthDate.checKIfHaveBirthDate(3);
       }
   },
