@@ -31,6 +31,13 @@ PARAMS.get("abc"); // 123
 PARAMS.get("myParam"); // 8
 ```
 
+```js
+// or, if you want all of them at once
+const PARAMS = Object.fromEntries(new URLSearchParams(location.search));
+
+console.log(PARAMS) // { abc: 123, myParam: 8 }
+```
+
 # Check whether user is logged in or not
 
 We can check this using the `$.ajax` function or even the global `vtexjs` variable. <br />
