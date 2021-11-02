@@ -59,16 +59,24 @@
     const END_TIME = ParseCountdownDate(END_DATE, END_HOURS);
 
     const INTERVAL = setInterval(() => {
-      const { TOTAL, DAYS, HOURS, MINUTES, SECONDS } = GetTimeRemaining(
-        END_TIME
-      );
+      const { TOTAL, DAYS, HOURS, MINUTES, SECONDS } = GetTimeRemaining(END_TIME);
 
-      ELEMENTS.Days.html(DAYS);
-      ELEMENTS.Hours.html(HOURS);
-      ELEMENTS.Minutes.html(MINUTES);
+      // logic, so it don't change everything every second
+      if (ELEMENTS.Days.html() != DAYS) {
+        ELEMENTS.Days.html(DAYS);
+      };
+
+      if (ELEMENTS.Hours.html() != HOURS) {
+        ELEMENTS.Hours.html(HOURS);
+      };
+
+      if (ELEMENTS.Minutes.html() != MINUTES) {
+        ELEMENTS.Minutes.html(MINUTES);
+      };
+
       ELEMENTS.Seconds.html(SECONDS);
 
-      // end cycle
+      // if the countdown is over
       if (TOTAL <= 0) {
          //...
         
