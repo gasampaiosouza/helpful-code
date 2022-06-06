@@ -6,7 +6,7 @@
   - [Check whether user is logged in or not](#check-whether-user-is-logged-in-or-not)
   - [Convert date to ages](#convert-date-to-ages)
 
-# Data Entities API
+## Data Entities API
 Get entities based on created **acronym**
 
 ```js
@@ -19,7 +19,7 @@ $.ajax({
 });
 ```
 
-# Get URL params as object
+## Get URL params as object
 Get url params as an unique object.
 
 ```js
@@ -38,7 +38,7 @@ const PARAMS = Object.fromEntries(new URLSearchParams(location.search));
 console.log(PARAMS) // { abc: 123, myParam: 8 }
 ```
 
-# Check whether user is logged in or not
+## Check whether user is logged in or not
 
 We can check this using the `$.ajax` function or even the global `vtexjs` variable. <br />
 You can use `$.ajax` if you can't wait for the `vtexjs` variable to load.
@@ -63,7 +63,7 @@ $.ajax({
 });
 ```
 
-# Convert date to ages
+## Convert date to ages
 
 You can use this if you're receiving a _date_ value and wanna parse it to ages.
 
@@ -103,4 +103,16 @@ getAge('16/09/1986') // 34
 getAge('05/01/2004') // 17
 getAge('31/03/2003') // 18
 getAge('') // 0
+```
+
+## Get all brazil states/cities (GIST)
+
+If you're developing an form or something that needs all brazil's states and/or cities, you can rely on this "api".
+
+```js
+const URL = 'https://gist.githubusercontent.com/ografael/2037135/raw/5d31e7baaddd0d599b64c3ec04827fc244333447/estados_cidades.json'
+
+fetch(URL).then(res => res.json()).then(cities => {
+  console.log(cities);
+})
 ```
